@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Image Generator - SDV-OS X PRODEV ZLI</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Manrope:wght@400;700&display=swap');*{font-family:Manrope} .orbitron{font-family:Orbitron} body{background:#05050a;color:#fff} .glass{background:rgba(18,18,26,0.85);backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,0.08)} .btn-neon{background:linear-gradient(135deg,#00f5ff,#7a5cff,#ff00a0)}</style>
+</head><body class="min-h-screen p-4">
+<div class="max-w-5xl mx-auto">
+<div class="flex justify-between items-center mb-6"><a href="/index.html" class="glass px-4 py-2 rounded-full text-xs"><i class="fas fa-arrow-left mr-2"></i> SDV-OS X PRODEV ZLI</a><div class="orbitron font-black text-cyan-400 text-xs">IMAGE STUDIO • 8K • PRODEV</div></div>
+<div class="glass rounded-[2rem] p-6">
+<h1 class="orbitron text-2xl font-black">Generate <span class="text-cyan-400">Any Image</span> 8K</h1>
+<textarea id="prompt" class="w-full mt-4 glass p-4 rounded-2xl text-sm outline-none h-28" placeholder="Ultra realistic Zimbabwean fashion model, Harare street style, 8K..."></textarea>
+<div class="grid grid-cols-3 gap-2 mt-3">
+<select id="ratio" class="glass p-3 rounded-xl text-xs"><option value="1024x1024">1:1 Square</option><option value="1280x720">16:9 Wide</option><option value="720x1280">9:16 Portrait</option></select>
+<button onclick="generate()" id="genBtn" class="btn-neon rounded-xl font-black text-xs py-3 col-span-2">GENERATE ✨</button>
+</div>
+<div id="loading" class="hidden mt-6 text-center"><div class="w-16 h-16 mx-auto rounded-full btn-neon animate-pulse flex items-center justify-center"><i class="fas fa-wand-magic-sparkles"></i></div><p class="text-xs mt-3 text-gray-400">Generating via Pollinations...</p></div>
+<div id="result" class="mt-6 glass rounded-[1.5rem] p-3 hidden"><img id="img" class="w-full rounded-[1rem]"><div class="flex gap-2 mt-3"><button onclick="download()" class="glass px-4 py-2 rounded-full text-xs flex-1">Download</button><button onclick="copyPrompt()" class="glass px-4 py-2 rounded-full text-xs flex-1">Copy</button></div></div>
+</div></div>
+<script>
+function generate(){
+ const p=document.getElementById('prompt').value.trim(); if(!p) return alert('Enter prompt');
+ const btn=document.getElementById('genBtn'); btn.innerText='GENERATING...'; btn.disabled=true;
+ document.getElementById('loading').classList.remove('hidden'); document.getElementById('result').classList.add('hidden');
+ const seed=Math.floor(Math.random()*999999);
+ const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(p)}?width=1024&height=1024&seed=${seed}&nologo=true&enhance=true`;
+ const img=document.getElementById('img'); img.src=url;
+ img.onload=()=>{document.getElementById('loading').classList.add('hidden'); document.getElementById('result').classList.remove('hidden'); btn.innerText='GENERATE ✨'; btn.disabled=false;}
+ img.onerror=()=>{alert('Failed, try again'); btn.innerText='GENERATE ✨'; btn.disabled=false; document.getElementById('loading').classList.add('hidden');}
+}
+function download(){const a=document.createElement('a'); a.href=document.getElementById('img').src; a.download='prodev-zli-8k.png'; a.click();}
+function copyPrompt(){navigator.clipboard.writeText(document.getElementById('prompt').value); alert('Copied');}
+</script></body></html>
