@@ -208,3 +208,33 @@ function closeApp(){document.getElementById('appModal').classList.add('hidden');
 <script src="/js/main.js"></script>
 </body>
 </html>
+<style>
+/* HOT FIX - stats fit pro */
+.md\:col-span-4.grid.grid-cols-3,
+div[class*="md:col-span-4"] {
+  gap: 8px !important;
+}
+.md\:col-span-4.grid.grid-cols-3 > div {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  padding: 12px 6px !important;
+  border-radius: 16px !important;
+  text-align: center !important;
+}
+.md\:col-span-4.grid.grid-cols-3 > div > div:first-child {
+  font-size: 18px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+.md\:col-span-4.grid.grid-cols-3 > div > div:nth-child(2) {
+  font-size: 6.5px !important;
+  letter-spacing: 0.08em !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  margin-top: 6px !important;
+  line-height: 1 !important;
+  max-width: 100% !important;
+}
+</style>
