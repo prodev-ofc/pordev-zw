@@ -1,7 +1,11 @@
 {
-  "rewrites": [
-    { "source": "/image", "destination": "/image.html" },
-    { "source": "/terms", "destination": "/terms.html" },
-    { "source": "/upgrade", "destination": "/upgrade.html" }
+  "version": 2,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "public/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/og-image.png", "dest": "/public/og-image.png" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
